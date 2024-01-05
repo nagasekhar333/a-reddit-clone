@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
     tools {
@@ -25,11 +24,10 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/nagasekhar333/a-reddit-clone.git'
             }
         }
-        stage("Sonarqube Analysis") {
+        stage('Sonarqube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube-Server') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Reddit-Clone-CI \
-                    -Dsonar.projectKey=Reddit-Clone-CI'''
+                    sh '$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Reddit-Clone-CI -Dsonar.projectKey=Reddit-Clone-CI -X'
                 }
             }
         }
